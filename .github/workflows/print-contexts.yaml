@@ -48,5 +48,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - run: which pg_isready && wd && ls -lah 
       - run: pg_isready -h localhost -p ${{ job.services.postgres.ports[5432] }}
       - run: ./run-tests
