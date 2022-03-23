@@ -10,3 +10,10 @@ jobs:
           node-version: '14'
       - run: npm install -g bats
       - run: bats -v
+  list-dir:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
