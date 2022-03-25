@@ -46,7 +46,7 @@ jobs:
           if [[ ${{ steps.generate_number.outputs.random_number }} == 0 ]]; then exit 0; else exit 1; fi
   
   test-matrix:
-    if: ${{ github.ref == 'master' }}
+    # if: ${{ github.ref == 'master' }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
