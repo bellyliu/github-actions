@@ -65,7 +65,7 @@ jobs:
         run: pwd && ls -lah
       - run: env
 
-  greeting_job:
+  env_job:
     if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     env:
@@ -80,3 +80,23 @@ jobs:
         run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
       - name: "Print some default env"
         run: echo "Triggered by branch $GITHUB_REF"
+
+# Using-cache job is just example. Its ok not to run it
+  using-cache: 
+    env:
+      GENERATE_NUM: false
+    if: ${{ env.GENERATE_NUM }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache Primes
+      id: cache-primes
+      uses: actions/cache@v3
+      with:
+        path: prime-numbers
+        key: ${{ runner.os }}-primes
+    - name: Generate Prime Numbers
+      if: steps.cache-primes.outputs.cache-hit != 'true'
+      run: /generate-primes.sh -d prime-numbers
+    - name: Use Prime Numbers
+      run: /primes.sh -d prime-numbers
