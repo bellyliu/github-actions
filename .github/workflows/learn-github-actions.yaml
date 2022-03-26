@@ -3,7 +3,7 @@ on: push
 
 env:
   DAY_OF_WEEK: Monday
-  GENERATE_NUM: ${{ false }}
+  GENERATE_RAND_NUM: ${{ false }}
 
 jobs:
   check-bats-version:
@@ -84,7 +84,7 @@ jobs:
 
 # Using-cache job is just example. Its ok not to run it
   using-cache:      
-    if: ${{ env.GENERATE_NUM }}
+    if: ${{ github.ref != 'refs/heads/master' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
