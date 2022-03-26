@@ -3,7 +3,7 @@ on: push
 
 env:
   DAY_OF_WEEK: Monday
-  GENERATE_NUM: false
+  GENERATE_NUM: ${{ false }}
 
 jobs:
   check-bats-version:
