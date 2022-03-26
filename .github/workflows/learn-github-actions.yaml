@@ -59,3 +59,4 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Fake Install dependencies
         run: pwd && ls -lah
+      - run: env
