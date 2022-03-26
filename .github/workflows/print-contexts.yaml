@@ -20,21 +20,21 @@ jobs:
         run: echo '${{ toJSON(matrix) }}'
   
   run_if_branch_master:
-    if: ${{ github.ref == 'master' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     steps:
       - name: Run If Push to master branch
         run: echo 'Hey im running on master'
   
   run_if_branch_not_master:
-    if: ${{ github.ref != 'master' }}
+    if: ${{ github.ref != 'refs/heads/master' }}
     runs-on: ubuntu-latest
     steps:
       - name: Run If Push to another branch
         run: echo 'Hey im running on ${{ github.ref }}'
   
   postgres-job:
-    if: ${{ github.ref != 'master' }}
+    if: ${{ github.ref != 'refs/heads/master' }}
     runs-on: ubuntu-latest
     services:
       postgres:
