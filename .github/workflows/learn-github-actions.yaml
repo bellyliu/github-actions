@@ -3,6 +3,7 @@ on: push
 
 env:
   DAY_OF_WEEK: Monday
+  GENERATE_NUM: false
 
 jobs:
   check-bats-version:
@@ -82,9 +83,7 @@ jobs:
         run: echo "Triggered by branch $GITHUB_REF"
 
 # Using-cache job is just example. Its ok not to run it
-  using-cache: 
-    env:
-      GENERATE_NUM: false
+  using-cache:      
     if: ${{ env.GENERATE_NUM }}
     runs-on: ubuntu-latest
     steps:
