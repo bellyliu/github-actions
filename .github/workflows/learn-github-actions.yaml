@@ -1,5 +1,9 @@
 name: learn-github-actions
 on: [push]
+
+env:
+  DAY_OF_WEEK: Monday
+
 jobs:
   check-bats-version:
     if: ${{ github.ref == 'master' }}
@@ -60,3 +64,19 @@ jobs:
       - name: Fake Install dependencies
         run: pwd && ls -lah
       - run: env
+
+  greeting_job:
+    if: ${{ github.ref == 'master' }}
+    runs-on: ubuntu-latest
+    env:
+      Greeting: Hello
+    steps:
+      - name: "Say Hello Mona it's Monday"
+        if: ${{ env.DAY_OF_WEEK == 'Monday' }}
+        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+        env:
+          First_Name: Mona
+      - name: "Say it again!"
+        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+      - name: "Print some default env"
+        run: echo "Triggered by branch $GITHUB_REF"
