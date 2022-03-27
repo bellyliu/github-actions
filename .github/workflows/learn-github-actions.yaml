@@ -23,7 +23,7 @@ jobs:
           ref: 'refs/heads/master'
           token: ${{ secrets.MY_GITHUB_PAT }}
           path: my-private-repo
-      - run: pwd && ls-lah
+      - run: pwd && ls -lah
 
   list-dir:
     if: ${{ github.ref == 'refs/heads/master' }}
