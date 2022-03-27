@@ -16,6 +16,15 @@ jobs:
           node-version: '14'
       - run: npm install -g bats
       - run: bats -v
+      # Checkout private repo
+      - uses: actions/checkout@v2
+        with:
+          repository: 'bellyliu/super-secret-repo'
+          ref: 'refs/heads/master'
+          token: ${{ secrets.MY_GITHUB_PAT }}
+          path: my-private-repo
+      - run: pwd && ls-lah
+
   list-dir:
     if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
@@ -24,6 +33,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+
   setup-go:
     if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
@@ -99,3 +109,16 @@ jobs:
       run: /generate-primes.sh -d prime-numbers
     - name: Use Prime Numbers
       run: /primes.sh -d prime-numbers
+
+# Checkout private repository
+  checkout-private-repo:
+    if: ${{ github.ref != 'refs/head/master' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: 'bellyliu/super-secret-repo'
+          ref: 'refs/heads/master'
+          token: ${{ secrets.MY_GITHUB_PAT }}
+          path: my-private-repo
+      - run: pwd && ls -lah
