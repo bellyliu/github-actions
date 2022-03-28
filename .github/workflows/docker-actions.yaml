@@ -9,6 +9,9 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       
+      - name: is docker exists
+        run: docker info
+      
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v3
