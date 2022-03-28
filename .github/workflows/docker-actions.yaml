@@ -12,6 +12,12 @@ jobs:
       - name: is docker exists
         run: docker info
       
+      - name: check docker images
+        run: docker images
+      
+      - name: check docker ps
+        run: docker ps
+      
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v3
