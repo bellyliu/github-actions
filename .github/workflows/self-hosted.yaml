@@ -1,0 +1,11 @@
+name: Self Hosted Runner
+on: push
+
+jobs:
+  check_docker:
+    runs-on: self-hosted
+    steps:
+      - run: docker info
+      - run: docker images
+      - run: pwd && ls -lah
+      - run: whoami
